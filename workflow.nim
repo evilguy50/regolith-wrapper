@@ -19,7 +19,7 @@ proc workflow(base, author, project: string)=
     setEnv(author, project)
     project.global()
     setCurrentDir(fmt"{root}/projects/{project}")
-    discard execShellCmd("./work.exe regolith -a unlock")
+    discard execShellCmd(fmt"{root}/projects/{project}/work.exe regolith -a unlock")
     setCurrentDir(root)
 
 dispatch(workflow)
