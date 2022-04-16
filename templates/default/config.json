@@ -1,0 +1,21 @@
+{
+  "name": "$packName",
+  "author": "$author",
+  "packs": {
+    "behaviorPack": "./packs/BP",
+    "resourcePack": "./packs/RP"
+  },
+  "regolith": {
+    "profiles": {
+      "dev": {
+        "filters": [],
+        "export": {
+          "target": "development",
+          "readOnly": false
+        }
+      }
+    },
+    "filterDefinitions": {},
+    "dataPath": "./packs/data"
+  }
+}

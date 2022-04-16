@@ -1,0 +1,30 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "pack.description",
+    "name": "pack.name",
+    "uuid": "$uuid1",
+    "version": [0, 0, 1],
+    "min_engine_version": [1, 16, 200]
+  },
+  "modules": [{
+    "description": "pack.description",
+    "type": "data",
+    "uuid": "$uuid2",
+    "version": [0, 0, 1]
+  }],
+  "metadata": {
+    "generated_with": {
+      "Pulsar": [
+        "$pulsarVersion.0"
+      ],
+      "regolith": [
+        "$regolithVersion"
+      ]
+    }
+  },
+  "dependencies": [{
+    "uuid": "$uuid3",
+    "version": [0, 0, 1]
+  }]
+}
