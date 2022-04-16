@@ -2,7 +2,6 @@ from os import getAppDir, dirExists, createDir, setCurrentDir, execShellCmd, cop
 from utils import setEnv, global, info, error
 from tools import downloadTool
 from strformat import fmt
-import colorize
 import cligen
 
 downloadTool("pulsar")
