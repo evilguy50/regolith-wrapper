@@ -19,7 +19,7 @@ the all action installs all filters inside of your projects filter definitions k
 ./work.exe regolith -a all
 ##### install example
 the install action wraps regolith install to install new remote filters
-./work.exe regolith -a install github.com/Nusiq/regolith-filters/subfunctions
+./work.exe regolith -a "install github.com/Nusiq/regolith-filters/subfunctions"
 #### Pulsar
 ./work.exe pulsar (-t or --tempName [Template List](https://github.com/evilguy50/Pulsar/blob/main/template_info.txt)) (list of names seperated by a space)
 ##### Example:
