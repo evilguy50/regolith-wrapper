@@ -42,7 +42,7 @@ Regolith and Pulsar will update to the latest release when you make a new projec
 When you create a new project a blank addon will be created for you.
 ### Global filter definitions:
 Quickly define filters in new projects by defining them inside the global config.
-The global config does NOT install the filters for you. so make sure to run ``work.exe regolith -a all` to install the filters locally.
+The global config does NOT install the filters for you. so make sure to run ``work.exe regolith -a all`` to install the filters locally.
 ### Global and local user templates:
 Pulsar user templates can be defined per project or in the global_pulsar folder.
 ### Auto run multiple profiles:
@@ -53,6 +53,7 @@ Easilly create projects using templates.
 If you don't want to use the default template you can make your own by putting a regolith project in the template folder and enchancing the files/folders with a few variables:
 #### Variable list:
 All variables are prefixed with $
+
 uuid1
 uuid2
 uuid3
