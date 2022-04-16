@@ -15,6 +15,8 @@ proc regolith(action: string)=
     of "run":
         for p in readFile(fmt".\profiles.txt").split("\n"):
             discard os.execShellCmd(fmt"{regoPath} run {p}")
+    of "unlock":
+        discard os.execShellCmd(fmt"{regoPath} unlock")
     of "all":
         discard os.execShellCmd(fmt"{regoPath} install-all")
     if action.startsWith("install"):

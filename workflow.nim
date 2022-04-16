@@ -1,4 +1,4 @@
-from os import getAppDir, dirExists, createDir, copyDir, copyFile
+from os import getAppDir, dirExists, createDir, setCurrentDir, execShellCmd, copyDir, copyFile
 from utils import setEnv, global
 from tools import downloadTool
 from strformat import fmt
@@ -18,5 +18,8 @@ proc workflow(base, author, project: string)=
     copyFile(fmt"{root}\tools\interface\work.exe", fmt"{root}\projects\{project}\work.exe")
     setEnv(author, project)
     project.global()
+    setCurrentDir(fmt"{root}/projects/{project}")
+    discard execShellCmd("./work.exe regolith -a unlock")
+    setCurrentDir(root)
 
 dispatch(workflow)
