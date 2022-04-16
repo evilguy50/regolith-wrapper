@@ -3,8 +3,15 @@ from strutils import multiReplace, replace, contains
 from uuids import genUUID, `$`
 from strformat import fmt
 import json
+import colorize
 
 var root = os.getAppDir()
+
+proc info*(msg: string)=
+    echo "[" & fgCyan("Info") & "]: " & fgLightBlue(msg)
+
+proc error*(msg: string)=
+    echo "[" & fgRed("Error") & "]: " & fgLightRed(msg)
 
 proc setEnv*(author, project: string)=
     var
@@ -14,6 +21,7 @@ proc setEnv*(author, project: string)=
         uuid2 = genUUID()
         uuid3 = genUUID()
         uuid4 = genUUID()
+    info "Changing template variables"
     for f in os.walkDirRec(fmt"{root}/projects/{project}"):
         f.writeFile(f.readFile().multiReplace(
             ("$author", author), 
@@ -28,14 +36,17 @@ proc setEnv*(author, project: string)=
     for d in walkDirRec(fmt("{root}/projects/{project}"),yieldFilter = {pcDir}):
         if d.contains("$packName"):
             d.moveDir(d.replace("$packName", project))
+    info "Adding User templates folder structure"
     copyDir(fmt"{root}/tools/pulsar_{pulsarVersion}/User_templates", fmt"{root}/global_pulsar")
     copyDir(fmt"{root}/tools/pulsar_{pulsarVersion}/User_templates", fmt"{root}/projects/{project}/User_templates")
 
 proc global*(project: string)=
+    info "Adding global filter definitions to project"
     let config = readFile(fmt"{root}\global_config.json").parseJson()
     var local = fmt"{root}\projects\{project}\config.json"
     var localJson = local.readFile().parseJson()
     localJson["regolith"]["filterDefinitions"] = config["filterDefinitions"]
     local.writeFile(localJson.pretty())
+    info "Adding global User templates to project"
     for f in os.walkDirRec(fmt"{root}\global_pulsar"):
         f.copyFile(f.replace(fmt"{root}\global_pulsar\", fmt"{root}\projects\{project}\User_templates\"))
