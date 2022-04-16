@@ -1,4 +1,4 @@
-from os import walkDirRec, moveDir, copyFile, pcDir, setCurrentDir, getAppDir, execShellCmd
+from os import walkDirRec, moveDir, copyFile, copyDir, createDir, pcDir, setCurrentDir, getAppDir, execShellCmd
 from strutils import multiReplace, replace, contains
 from uuids import genUUID, `$`
 from strformat import fmt
@@ -28,6 +28,8 @@ proc setEnv*(author, project: string)=
     for d in walkDirRec(fmt("{root}/projects/{project}"),yieldFilter = {pcDir}):
         if d.contains("$packName"):
             d.moveDir(d.replace("$packName", project))
+    copyDir(fmt"{root}/tools/pulsar_{pulsarVersion}/User_templates", fmt"{root}/global_pulsar")
+    copyDir(fmt"{root}/tools/pulsar_{pulsarVersion}/User_templates", fmt"{root}/projects/{project}/User_templates")
 
 proc global*(project: string)=
     let config = readFile(fmt"{root}\global_config.json").parseJson()
@@ -35,3 +37,5 @@ proc global*(project: string)=
     var localJson = local.readFile().parseJson()
     localJson["regolith"]["filterDefinitions"] = config["filterDefinitions"]
     local.writeFile(localJson.pretty())
+    for f in os.walkDirRec(fmt"{root}\global_pulsar"):
+        f.copyFile(f.replace(fmt"{root}\global_pulsar\", fmt"{root}\projects\{project}\User_templates\"))

@@ -1,8 +1,8 @@
-import cligen
-import os
-import json
+from os import getAppDir, setCurrentDir, execShellCmd, moveDir
+from strutils import split, startsWith, join
 from strformat import fmt
-import strutils
+import cligen
+import json
 
 var toolJson = readFile(r"..\..\tools\version.json").parseJson()
 
@@ -14,22 +14,24 @@ proc regolith(action: string)=
     case action:
     of "run":
         for p in readFile(fmt".\profiles.txt").split("\n"):
-            discard os.execShellCmd(fmt"{regoPath} run {p}")
+            discard execShellCmd(fmt"{regoPath} run {p}")
     of "unlock":
-        discard os.execShellCmd(fmt"{regoPath} unlock")
+        discard execShellCmd(fmt"{regoPath} unlock")
     of "all":
-        discard os.execShellCmd(fmt"{regoPath} install-all")
+        discard execShellCmd(fmt"{regoPath} install-all")
     if action.startsWith("install"):
-        discard os.execShellCmd(fmt"{regoPath} {action}")
+        discard execShellCmd(fmt"{regoPath} {action}")
 
 proc pulsar(tempName: string, names: seq[string])=
     var wd = getAppDir()
     var pulsarVersion = toolJson["tools"]["pulsar"]
+    moveDir("./User_templates", fmt"..\..\tools\pulsar_{pulsarVersion}\User_templates")
     moveDir("./packs", fmt"..\..\tools\pulsar_{pulsarVersion}\packs")
     setCurrentDir(fmt"..\..\tools\pulsar_{pulsarVersion}")
     var nameStr = names.join(" ")
-    discard os.execShellCmd(fmt"pulsar_cli.exe -t {tempName} -o packs {nameStr}")
+    discard execShellCmd(fmt"pulsar_cli.exe -t {tempName} -o packs {nameStr}")
     moveDir("./packs", fmt"{wd}\packs")
+    moveDir("./User_templates", fmt"{wd}\User_templates")
     setCurrentDir(wd)
 
 dispatchMulti([regolith], [pulsar])

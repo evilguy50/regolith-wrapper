@@ -43,6 +43,8 @@ When you create a new project a blank addon will be created for you.
 ### Global filter definitions:
 Quickly define filters in new projects by defining them inside the global config.
 The global config does NOT install the filters for you. so make sure to run ``work.exe regolith -a all` to install the filters locally.
+### Global and local user templates:
+Pulsar user templates can be defined per project or in the global_pulsar folder.
 ### Auto run multiple profiles:
 Profile runtimes are set in your projects profiles.txt file.
 each line runs a different profile.
