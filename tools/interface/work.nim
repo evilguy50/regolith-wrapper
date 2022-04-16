@@ -1,5 +1,6 @@
-from os import getAppDir, setCurrentDir, execShellCmd, moveDir
-from strutils import split, startsWith, join
+from os import getAppDir, setCurrentDir, execShellCmd, moveDir, sleep
+from strutils import split, startsWith, join, replace
+from "../../utils" import info
 from strformat import fmt
 import cligen
 import json
@@ -24,12 +25,16 @@ proc regolith(action: string)=
 
 proc pulsar(tempName: string, names: seq[string])=
     var wd = getAppDir()
-    var pulsarVersion = toolJson["tools"]["pulsar"]
+    var pulsarVersion = toolJson["tools"]["pulsar"].to(string).replace("\"", "")
+    info "Moving Pack files and templates"
     moveDir("./User_templates", fmt"..\..\tools\pulsar_{pulsarVersion}\User_templates")
+    sleep(3 * 1000)
     moveDir("./packs", fmt"..\..\tools\pulsar_{pulsarVersion}\packs")
     setCurrentDir(fmt"..\..\tools\pulsar_{pulsarVersion}")
     var nameStr = names.join(" ")
     discard execShellCmd(fmt"pulsar_cli.exe -t {tempName} -o packs {nameStr}")
+    info "Moving Pack files and templates back"
+    sleep(3 * 1000)
     moveDir("./packs", fmt"{wd}\packs")
     moveDir("./User_templates", fmt"{wd}\User_templates")
     setCurrentDir(wd)
