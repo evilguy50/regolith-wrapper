@@ -1,8 +1,8 @@
 from os import getCurrentDir, getAppDir, dirExists, execShellCmd, removeDir, removeFile
-from osproc import execCmdEx
+from strutils import multiReplace, replace, contains, strip
 from zippy/zipArchives import extractAll
+from osproc import execCmdEx
 from strformat import fmt
-import strutils
 import json
 
 proc downloadTool*(t: string)=
