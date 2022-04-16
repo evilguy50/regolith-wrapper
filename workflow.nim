@@ -10,6 +10,8 @@ downloadTool("regolith")
 
 proc workflow(base, author, project: string)=
     var root = os.getAppDir()
+    if not os.dirExists(fmt"{root}/projects"):
+        createDir(fmt"{root}/projects")
     if not os.dirExists(fmt"{root}/templates/{base}"):
         echo fmt"Template {base} not found"
         quit(1)
