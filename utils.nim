@@ -29,9 +29,6 @@ proc setEnv*(author, project: string)=
         if d.contains("$packName"):
             d.moveDir(d.replace("$packName", project))
 
-proc buildWork*(project: string)=
-    copyFile(fmt"{root}\tools\interface\work.exe", fmt"{root}\projects\{project}\work.exe")
-
 proc global*(project: string)=
     let config = readFile(fmt"{root}\global_config.json").parseJson()
     var local = fmt"{root}\projects\{project}\config.json"

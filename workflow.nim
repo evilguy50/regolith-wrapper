@@ -16,8 +16,8 @@ proc workflow(base, author, project: string)=
         echo fmt"Template {base} not found"
         quit(1)
     copyDir(fmt"{root}/templates/{base}", fmt"{root}/projects/{project}")
+    copyFile(fmt"{root}\tools\interface\work.exe", fmt"{root}\projects\{project}\work.exe")
     setEnv(author, project)
-    project.buildWork()
     project.global()
 
 dispatch(workflow)

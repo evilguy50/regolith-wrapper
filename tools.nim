@@ -18,9 +18,9 @@ proc downloadTool*(t: string)=
     var version = readFile(os.getAppDir() & r"\tools\version.json").parseJson()["tools"][t].to(string).replace("\"", "").strip()
     case t:
     of "pulsar":
-        toolDownload = fmt"http://github.com/evilguy50/Pulsar/releases/download/{version}/pulsar_windows.zip"
+        toolDownload = fmt"http://github.com/evilguy50/Pulsar/releases/download/{latest}/pulsar_windows.zip"
     of "regolith":
-        toolDownload = fmt"http://github.com/Bedrock-OSS/regolith/releases/download/{version}/regolith_{version}_Windows_x86_64.zip"
+        toolDownload = fmt"http://github.com/Bedrock-OSS/regolith/releases/download/{latest}/regolith_{latest}_Windows_x86_64.zip"
     if version != latest:
         version = latest
         for d in os.walkDirs(root & r"\tools"):
