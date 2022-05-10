@@ -26,7 +26,7 @@ proc downloadTool*(t: string)=
     if version != latest:
         version = latest
         info fmt"removing old {t} version"
-        for d in os.walkDirs(root & r"\tools"):
+        for d in os.walkDirs(root & r"\tools\*"):
             if d.contains(t):
                 d.removeDir()
         let toolZip = fmt"{root}\tools\{t}_{version}.zip"
