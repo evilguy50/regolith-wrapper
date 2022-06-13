@@ -23,7 +23,7 @@ the install action wraps regolith install to install new remote filters
 #### Pulsar
 ./work.exe pulsar (-t or --tempName [Template List](https://github.com/evilguy50/Pulsar/blob/main/template_info.txt)) (list of names seperated by a space)
 ##### Example:
-./work.exe pulsar basic_block block_one block_two block_three
+./work.exe pulsar -t basic_block block_one block_two block_three
 
 ---
 ## features:
