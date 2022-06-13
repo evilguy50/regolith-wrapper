@@ -22,7 +22,7 @@ proc workflow(base, author, project: string)=
     project.global()
     setCurrentDir(fmt"{root}/projects/{project}")
     info fmt"Unlocking project {project}"
-    discard execShellCmd(fmt"{root}/projects/{project}/work.exe regolith -a unlock")
+    discard execShellCmd("powershell.exe ./work.exe regolith -a unlock")
     info fmt"Project {project} Created"
     setCurrentDir(root)
 

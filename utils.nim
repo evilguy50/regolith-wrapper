@@ -23,6 +23,7 @@ proc setEnv*(author, project: string)=
         uuid4 = genUUID()
     info "Changing template variables"
     for f in os.walkDirRec(fmt"{root}/projects/{project}"):
+        if f.contains(".regolith"): continue
         f.writeFile(f.readFile().multiReplace(
             ("$author", author), 
             ("$packName", project),
@@ -34,6 +35,7 @@ proc setEnv*(author, project: string)=
             ("$uuid4", $uuid4)
         ))
     for d in walkDirRec(fmt("{root}/projects/{project}"),yieldFilter = {pcDir}):
+        if d.contains(".regolith"): continue
         if d.contains("$packName"):
             d.moveDir(d.replace("$packName", project))
     info "Adding User templates folder structure"
