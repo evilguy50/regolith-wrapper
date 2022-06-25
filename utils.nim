@@ -43,12 +43,6 @@ proc setEnv*(author, project: string)=
     copyDir(fmt"{root}/tools/pulsar_{pulsarVersion}/User_templates", fmt"{root}/projects/{project}/User_templates")
 
 proc global*(project: string)=
-    info "Adding global filter definitions to project"
-    let config = readFile(fmt"{root}\global_config.json").parseJson()
-    var local = fmt"{root}\projects\{project}\config.json"
-    var localJson = local.readFile().parseJson()
-    localJson["regolith"]["filterDefinitions"] = config["filterDefinitions"]
-    local.writeFile(localJson.pretty())
     info "Adding global User templates to project"
     for f in os.walkDirRec(fmt"{root}\global_pulsar"):
         f.copyFile(f.replace(fmt"{root}\global_pulsar\", fmt"{root}\projects\{project}\User_templates\"))

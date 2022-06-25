@@ -41,6 +41,7 @@ Regolith and Pulsar will update to the latest release when you make a new projec
 ### Pack initialization:
 When you create a new project a blank addon will be created for you.
 ### Global filter definitions:
+##### Deprecated: (use project templates instead)
 Quickly define filters in new projects by defining them inside the global config.
 The global config does NOT install the filters for you. so make sure to run ``work.exe regolith -a all`` to install the filters locally.
 ### Global and local user templates:
